@@ -1,2 +1,13 @@
 # search-platform-sample
-Kotlin,SpringBoot,Solr,EKSでの検索基盤サンプル
+
+sample search platform by Kotlin,SpringBoot,SolrCloud,AWS EKS
+
+# wip: architecture
+
+![](./docs/overview.png)
+
+| Component  | Technology Selection                | Note                              |
+| ---------- | ----------------------------------- | --------------------------------- |
+| Search API | Kotlin, SpringBoot, AWS EKS         |                                   |
+| Indexer    | Kotlin, SpringBoot, AWS KES, AWS S3 |                                   |
+| Solr       | SolrOperator, AWS EKS               | https://solr.apache.org/operator/ |
