@@ -1,0 +1,29 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo printenv...
+      - printenv
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region ap-northeast-1)
+      - REPOSITORY_URI=${AWS_ACCOUNT_ID}.dkr.ecr.ap-northeast-1.amazonaws.com/${IMAGE_NAME}
+  build:
+    commands:
+      - echo started on $(date)
+      - docker pull ${REPOSITORY_URI}:latest
+      - echo ${BATCH_NAME} starting ...
+      - |
+        docker run \
+        -e BUCKET=${BUCKET} \
+        -e PATH_PREFIX=${PATH_PREFIX} \
+        -e ACCESS_KEY_ID=${ACCESS_KEY_ID} \
+        -e SECRET_ACCESS_KEY=${SECRET_ACCESS_KEY} \
+        -e SOLR_HOST=${SOLR_HOST} \
+        -e SOLR_PORT=${SOLR_PORT} \
+        -e COLLECTION=${COLLECTION} \
+        -e ID_COLUMN_NAME=${ID_COLUMN_NAME} \
+        -i ${REPOSITORY_URI}:latest
+  post_build:
+    commands:
+      - echo ${BATCH_NAME} completed on $(date
