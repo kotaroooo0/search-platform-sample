@@ -26,4 +26,4 @@ phases:
         -i ${REPOSITORY_URI}:latest
   post_build:
     commands:
-      - echo ${BATCH_NAME} completed on $(date
+      - echo ${BATCH_NAME} completed on $(date)
