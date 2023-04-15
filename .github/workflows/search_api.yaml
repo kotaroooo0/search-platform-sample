@@ -17,6 +17,10 @@ jobs:
         distribution: 'adopt'
         cache: 'gradle'
 
-    - name: UnitTests with Gradle
+    - name: Build with Gradle
+      run: ./gradlew build
+      working-directory: ./search_api
+
+    - name: Test with Gradle
       run: ./gradlew test
       working-directory: ./search_api
