@@ -1,3 +1,10 @@
 .DS_Store
 .env
 Dockerfile.local
+gradle
+.gitattributes
+build.gradle
+gradlew
+gradlew.bat
+settings.gradle
+.gradle
