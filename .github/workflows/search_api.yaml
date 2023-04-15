@@ -1,6 +1,9 @@
 name: search_api
 
-on: [push]
+on:
+  push:
+    paths:
+      - 'search_api/**'
 
 jobs:
   build:
@@ -16,10 +19,6 @@ jobs:
         java-version: '17'
         distribution: 'adopt'
         cache: 'gradle'
-
-    - name: Build with Gradle
-      run: ./gradlew build
-      working-directory: ./search_api
 
     - name: Test with Gradle
       run: ./gradlew test
