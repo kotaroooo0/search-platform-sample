@@ -12,4 +12,4 @@ WORKDIR /workspace
 COPY s3-to-solr.yaml .
 COPY entrypoint.sh .
 
-ENTRYPOINT [ "/entrypoint.sh" ]
+ENTRYPOINT [ "/workspace/entrypoint.sh" ]
