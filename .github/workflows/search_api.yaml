@@ -1,0 +1,25 @@
+name: search_api
+
+on:
+  push:
+    paths:
+      - 'search_api/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+        distribution: 'adopt'
+        cache: 'gradle'
+
+    - name: Test with Gradle
+      run: ./gradlew test
+      working-directory: ./search_api
