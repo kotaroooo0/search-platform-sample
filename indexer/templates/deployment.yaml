@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: indexer-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: indexer
+  template:
+    metadata:
+      labels:
+        app: indexer
+    spec:
+      containers:
+      - name: indexer-container
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: S3_BUCKET
+          value: "{{ .Values.data.s3_bucket }}"
+        - name: S3_KEY
+          value: "{{ .Values.data.s3_key }}"
+        - name: ELASTICSEARCH_URL
+          value: "{{ .Values.elasticsearch.url }}"
+        - name: ELASTICSEARCH_USERNAME
+          value: "{{ .Values.elasticsearch.username }}"
+        - name: ELASTICSEARCH_PASSWORD
+          value: "{{ .Values.elasticsearch.password }}"
+        - name: ELASTICSEARCH_INDEX
+          value: "{{ .Values.elasticsearch.index }}"
+        - name: AWS_ACCESS_KEY_ID
+          value: "{{ .Values.aws.access_key_id }}"
+        - name: AWS_SECRET_ACCESS_KEY
+          value: "{{ .Values.aws.secret_access_key }}"
+        - name: AWS_REGION
+          value: "{{ .Values.aws.region }}"

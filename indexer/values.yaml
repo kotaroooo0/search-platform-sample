@@ -1,0 +1,18 @@
+replicaCount: 1
+
+image:
+  repository: indexer
+  tag: latest
+
+data:
+  s3_bucket: search-platform-sample
+  s3_key: sample-data/donguri.csv
+aws:
+  access_key_id: null
+  secret_access_key: null
+  region: ap-northeast-1
+elasticsearch:
+  url: http://quickstart-es-http:9200
+  username: null
+  password: null
+  index: donguris
