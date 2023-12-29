@@ -1,15 +1,11 @@
-FROM openjdk:8
+FROM golang:1.21
 
-RUN wget -q https://dl.embulk.org/embulk-latest.jar -O /usr/local/bin/embulk \
-    && chmod +x /usr/local/bin/embulk \
-    && embulk gem install embulk-input-s3 \
-    && embulk gem install embulk-output-elasticsearch \
-    && apt-get update \
-    && apt-get install gettext-base -y
+WORKDIR /app
 
-WORKDIR /workspace
+ADD go.mod go.sum main.go ./
+RUN go mod download
 
-COPY s3-to-elasticsearch.yaml .
-COPY entrypoint.sh .
+ADD main.go ./
+RUN go build -o main /app/main.go
 
-ENTRYPOINT [ "/workspace/entrypoint.sh" ]
+ENTRYPOINT ["/app/main"]
