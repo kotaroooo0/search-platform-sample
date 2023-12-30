@@ -2,7 +2,7 @@ FROM golang:1.21
 
 WORKDIR /app
 
-ADD go.mod go.sum main.go ./
+ADD go.mod go.sum ./
 RUN go mod download
 
 ADD main.go index_template.json ./
