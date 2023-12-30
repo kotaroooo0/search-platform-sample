@@ -2,34 +2,24 @@ name: indexer
 
 on:
   push:
-    branches:
-      - main
     paths:
-      - 'indexer/**'
+      - "indexer/**"
 
 jobs:
-  build-and-push:
+  build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./indexer
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+      - uses: actions/checkout@v4
+      - name: Setup Go
+        uses: actions/setup-go@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-1
-
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-
-      - name: Build and push Docker image
-        id: build-image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPO_NAME }}
-        run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          go-version: "1.21.x"
+      - name: Install dependencies
+        run: go get .
+      - name: Build
+        run: go build -v ./...
+      - name: Test with the Go CLI
+        run: go test
