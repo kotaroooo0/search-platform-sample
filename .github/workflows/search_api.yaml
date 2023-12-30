@@ -3,23 +3,23 @@ name: search_api
 on:
   push:
     paths:
-      - 'search_api/**'
+      - "search_api/**"
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./search_api
     steps:
-    - name: Checkout the code
-      uses: actions/checkout@v2
-
-    - name: Set up JDK
-      uses: actions/setup-java@v2
-      with:
-        java-version: '17'
-        distribution: 'adopt'
-        cache: 'gradle'
-
-    - name: Test with Gradle
-      run: ./gradlew test
-      working-directory: ./search_api
+      - uses: actions/checkout@v4
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "1.21.x"
+      - name: Install dependencies
+        run: go get .
+      - name: Build
+        run: go build -v ./...
+      - name: Test with the Go CLI
+        run: go test
