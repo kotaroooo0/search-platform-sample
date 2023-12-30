@@ -86,8 +86,18 @@ func main() {
 	}
 
 	// インデックス作成
+	file, err := os.Open("index_template.json")
+	if err != nil {
+		log.Fatal(err)
+	}
+	res, err := esClient.Indices.PutIndexTemplate(esIndex, file)
+	if err != nil {
+		log.Fatal(err)
+	}
+	res.Body.Close()
+
 	indexName := esIndex + time.Now().Format("20060102150405")
-	res, err := esClient.Indices.Create(indexName)
+	res, err = esClient.Indices.Create(indexName)
 	if err != nil {
 		log.Println(indexName)
 		log.Fatalf("Cannot create index: %s", err)
