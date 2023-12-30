@@ -1,0 +1,11 @@
+replicaCount: 1
+
+image:
+  repository: search_api
+  tag: latest
+
+elasticsearch:
+  url: http://quickstart-es-http:9200
+  username: null
+  password: null
+  index: donguris-latest

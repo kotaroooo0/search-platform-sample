@@ -1,0 +1,20 @@
+{
+  "script": {
+    "lang": "mustache",
+    "source": {
+      "_source": [
+        "episode"
+      ],
+      "from": "{{from}}",
+      "size": "{{size}}",
+      "query": {
+        "match": {
+          "script": {
+            "query": "{{q}}",
+            "operator": "and"
+          }
+        }
+      }
+    }
+  }
+}
