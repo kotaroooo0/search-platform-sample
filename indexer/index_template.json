@@ -1,0 +1,35 @@
+{
+    "index_patterns": [
+      "donguri*"
+    ],
+    "template": {
+      "settings": {
+        "analysis": {
+          "tokenizer": {
+            "ngram_tokenizer": {
+              "type": "ngram",
+              "min_gram": 2,
+              "max_gram": 2
+            }
+          },
+          "analyzer": {
+            "ngram_analyzer": {
+              "type": "custom",
+              "tokenizer": "ngram_tokenizer"
+            }
+          }
+        }
+      },
+      "mappings": {
+        "properties": {
+          "episode": {
+            "type": "integer"
+          },
+          "script": {
+            "type": "text",
+            "analyzer": "ngram_analyzer"
+          }
+        }
+      }
+    }
+  }
