@@ -1,13 +1,13 @@
 # search-platform-sample
 
-sample search platform by Kotlin,SpringBoot,SolrCloud,AWS EKS
+Sample search platform by Go, Elasticsearch, Kubernetes
 
 # wip: architecture
 
 ![](./docs/overview.png)
 
-| Component  | Technology Selection                | Note                              |
-| ---------- | ----------------------------------- | --------------------------------- |
-| Search API | Kotlin, SpringBoot, AWS EKS         |                                   |
-| Indexer    | Kotlin, SpringBoot, AWS KES, AWS S3 |                                   |
-| Solr       | SolrOperator, AWS EKS               | https://solr.apache.org/operator/ |
+| Component     | Technology Selection        | Note                                    |
+| ------------- | --------------------------- | --------------------------------------- |
+| Search API    | Go on Kubernetes            |                                         |
+| Indexer       | Go on Kubernetes            |                                         |
+| Elasticsearch | Elastic Cloud on Kubernetes | https://github.com/elastic/cloud-on-k8s |
