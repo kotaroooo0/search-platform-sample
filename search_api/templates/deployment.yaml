@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: search-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: search-api  # Podを識別するためのラベル
+  template:
+    metadata:
+      labels:
+        app: search-api  # Podにラベルを付与
+    spec:
+      containers:
+      - name: search-api-container
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: ELASTICSEARCH_URL
+          value: "{{ .Values.elasticsearch.url }}"
+        - name: ELASTICSEARCH_USERNAME
+          value: "{{ .Values.elasticsearch.username }}"
+        - name: ELASTICSEARCH_PASSWORD
+          value: "{{ .Values.elasticsearch.password }}"
+        - name: ELASTICSEARCH_INDEX
+          value: "{{ .Values.elasticsearch.index }}"
